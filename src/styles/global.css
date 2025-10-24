@@ -1,0 +1,36 @@
+@import "tailwindcss";
+@import "swiper/css";
+@import "swiper/css/navigation";
+@import "swiper/css/pagination";
+
+.equipment-slider {
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+/* Custom pagination dots */
+.swiper-pagination {
+  display: flex;
+  justify-content: center;
+  gap: 12px;
+}
+
+:global(.swiper-pagination-bullet) {
+  width: 12px;
+  height: 12px;
+  background: rgba(0, 0, 0, 0.3);
+  opacity: 1;
+  transition: all 0.3s ease;
+}
+
+:global(.swiper-pagination-bullet-active) {
+  background: rgba(0, 0, 0, 0.8);
+  width: 32px;
+  border-radius: 6px;
+}
+
+/* Hide default Swiper buttons */
+:global(.swiper-button-prev::after),
+:global(.swiper-button-next::after) {
+  display: none;
+}

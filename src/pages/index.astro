@@ -1,0 +1,521 @@
+---
+import "../styles/global.css";
+
+// Type definition for equipment items
+interface EquipmentItem {
+  id: number;
+  name: string;
+  quantity: string;
+  image: string;
+  alt: string;
+}
+
+// Static data - replace images with your actual equipment images
+const equipmentData: EquipmentItem[] = [
+  {
+    id: 1,
+    name: "Retífica laboratório concreto",
+    quantity: "1 unidade",
+    image: "/images/equipment-1.png",
+    alt: "Retífica laboratório concreto"
+  },
+  {
+    id: 2,
+    name: "Máquina de corte de ferro",
+    quantity: "3 unidades",
+    image: "/images/equipment-2.png",
+    alt: "Máquina de corte de ferro"
+  },
+  {
+    id: 3,
+    name: "Rotor para helicoidal",
+    quantity: "4 unidades",
+    image: "/images/equipment-3.png",
+    alt: "Rotor para helicoidal"
+  },
+  {
+    id: 4,
+    name: "Compressor industrial",
+    quantity: "2 unidades",
+    image: "/images/equipment-4.png",
+    alt: "Compressor industrial"
+  }
+];
+---
+
+<!DOCTYPE html>
+<html lang="pt-BR">
+	
+	<head>
+		<meta charset="utf-8" />
+		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+		<meta name="viewport" content="width=device-width" />
+		<meta name="generator" content={Astro.generator} />
+		<!-- SwiperJS CSS -->
+		<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" />
+		<!-- SwiperJS Script -->
+		<script is:inline src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
+		<title>Z2 Locações</title>
+	</head>
+	<body class="bg-white">
+		<div class="gap-4 w-full items-center justify-items-center bg-neutral-400 p-4 hidden">
+			<div class="h-12 w-12 bg-indigo-950"></div>
+			<div class="h-12 w-12 bg-sky-900"></div>
+			<div class="h-12 w-12 bg-amber-500"></div>
+			<div class="h-12 w-12 bg-neutral-400"></div>
+			<div class="h-12 w-12 bg-neutral-800"></div>
+		</div>
+		<!-- Navigation -->
+    <nav class="w-full bg-neutral-200 shadow-sm">
+        <div class="container mx-auto px-4">
+            <div class="flex items-center justify-between h-16">
+                <!-- Logo -->
+                <div class="flex-shrink-0">
+                    <a href="#" class="text-2xl font-bold text-gray-900">
+						<img src="/logo_z2_indigo_dark.png" alt="Z2 Logo" class="h-8 w-auto object-fill"/>
+					</a>
+                </div>
+
+                <!-- Desktop Menu - Hidden on mobile, visible from md breakpoint -->
+                <div class="hidden md:flex items-center justify-center flex-1 space-x-8">
+                    <a href="#" class="text-gray-700 hover:text-gray-900 font-medium transition-colors">início</a>
+                    <a href="#" class="text-gray-700 hover:text-gray-900 font-medium transition-colors">sobre</a>
+                    <a href="#" class="text-gray-700 hover:text-gray-900 font-medium transition-colors">máquinas</a>
+                </div>
+
+                <!-- CTA Button - Desktop -->
+                <div class="hidden md:block flex-shrink-0">
+                    <button class="bg-amber-500 hover:bg-amber-700 text-white font-semibold px-6 py-2 rounded-full transition-colors">
+                        Fale Conosco
+                    </button>
+                </div>
+
+                <!-- Mobile Hamburger Button -->
+                <div class="md:hidden">
+                    <button id="mobile-menu-btn" class="text-gray-700 hover:text-gray-900 focus:outline-none">
+                        <svg class="h-6 w-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path id="menu-icon" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"/>
+                            <path id="close-icon" class="hidden" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/>
+                        </svg>
+                    </button>
+                </div>
+            </div>
+
+            <!-- Mobile Menu - Hidden by default -->
+            <div id="mobile-menu" class="hidden md:hidden pb-4">
+                <div class="flex flex-col space-y-4">
+                    <a href="#" class="text-gray-700 hover:text-gray-900 font-medium transition-colors">início</a>
+                    <a href="#" class="text-gray-700 hover:text-gray-900 font-medium transition-colors">sobre</a>
+                    <a href="#" class="text-gray-700 hover:text-gray-900 font-medium transition-colors">máquinas</a>
+                    <button class="bg-orange-500 hover:bg-orange-600 text-white font-semibold px-6 py-2 rounded-lg transition-colors w-full">
+                        Fale Conosco
+                    </button>
+                </div>
+            </div>
+        </div>
+    </nav>
+   
+    <section class="w-full min-h-screen relative overflow-hidden">
+        <!-- Background Image -->
+        <div class="absolute inset-0 w-full h-full">
+            <!-- Grey overlay on mobile, image visible on desktop -->
+            <div class="absolute inset-0 bg-red-400 md:bg-transparent"></div>
+            <img 
+                src="/logo_z2_cinza.png" 
+                alt="Construction crane" 
+                class="hidden md:block w-full h-full object-contain object-left-top opacity-25 -ml-40"
+            />
+        </div>
+
+        <!-- Content Container -->
+        <div class="container mx-auto relative">
+            <div class="min-h-screen flex items-center">
+                <div class="w-full md:w-1/2 py-12 md:py-0 px-4 md:px-0">
+                    <!-- Text Content -->
+                    <div class="space-y-6 md:space-y-8">
+                        <!-- Heading -->
+                        <h1 class="text-4xl sm:text-5xl lg:text-5xl font-bold text-gray-900 leading-tight">
+                            Movendo sua obra,<br>
+                            construindo<br>
+                            <span class="italic">resultados</span>
+                        </h1>
+
+                        <!-- Paragraph -->
+                        <p class="text-base sm:text-lg lg:text-xl text-gray-700 max-w-md">
+                            A Z2 oferece o material que você precisa para executar sua obra com excelência.
+                        </p>
+
+                        <!-- CTA Button -->
+                        <div class="pt-4">
+                            <button class="inline-flex items-center gap-3 px-8 py-4 bg-gradient-to-r from-yellow-500 to-orange-500 hover:from-yellow-600 hover:to-orange-600 text-gray-900 font-semibold rounded-full transition-all duration-300 shadow-lg hover:shadow-xl transform hover:scale-105">
+                                Faça seu pedido
+                                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M9 5l7 7-7 7"/>
+                                </svg>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Image on desktop (right side) - AJUSTADO -->
+        <div class="hidden md:block absolute right-0 top-1/2 -translate-y-1/2 h-[66.67vh] w-[50vw]">
+            <img 
+                src="/hero_image.jpg" 
+                alt="Imagem de equipamentos" 
+                class="h-full w-full object-cover rounded-tl-[2rem] rounded-bl-[8rem] shadow-2xl"
+            />
+        </div>
+
+        <!-- Mobile: Crane image overlay -->
+        <div class="md:hidden absolute right-0 top-1/4 w-2/3 h-1/2 opacity-20">
+            <img 
+                src="https://via.placeholder.com/400x400/cccccc/666666?text=Logo+Z2" 
+                alt="Construction crane" 
+                class="w-full h-full object-cover object-center opacity-20"
+            />
+        </div>
+    </section>
+	<!-- Features Section -->
+    <section class="w-full bg-indigo-950 py-16 md:py-24">
+        <div class="container mx-auto px-4">
+            <h2 class="text-white text-3xl md:text-4xl lg:text-5xl font-medium text-center mb-12 md:mb-16 tracking-wide">
+                DIFERENCIAIS
+            </h2>
+            
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8 md:gap-12">
+				<!-- Feature 1 -->
+				<div class="flex flex-col items-center text-center h-full transition-transform duration-300 ease-out hover:-translate-y-2 hover:scale-[1.02] hover:shadow-lg">
+					<div class="mb-6 h-48 w-auto transition-transform duration-300 ease-out hover:scale-110 hover:brightness-110">
+						<img src="/icon_truck.svg" alt="Ícone de qualidade" class="mx-auto">
+					</div>
+						<h3 class="text-white text-xl md:text-2xl mb-2 h-[4rem] flex flex-col items-center justify-start transition-colors duration-300 hover:text-amber-300">
+						<div>Atendemos em todo</div>
+						<div class="font-bold">território nacional</div>
+						</h3>
+				</div>
+				
+
+				<!-- Feature 2 -->
+				<div class="flex flex-col items-center text-center h-full transition-transform duration-300 ease-out hover:-translate-y-2 hover:scale-[1.02] hover:shadow-lg">
+					<div class="mb-6 h-48 w-auto transition-transform duration-300 ease-out hover:scale-110 hover:brightness-110">
+						<img src="/icon_badge.svg" alt="Ícone de qualidade" class="mx-auto">
+					</div>
+						<h3 class="text-white text-xl md:text-2xl mb-2 h-[4rem] flex flex-col items-center justify-start transition-colors duration-300 hover:text-amber-300">
+							<div>Equipamentos de</div>
+							<div class="font-bold">alta qualidade</div>
+						</h3>
+				</div>
+				<!-- Feature 3 -->
+				<div class="flex flex-col items-center text-center h-full transition-transform duration-300 ease-out hover:-translate-y-2 hover:scale-[1.02] hover:shadow-lg">
+					<div class="mb-6 h-48 w-auto transition-transform duration-300 ease-out hover:scale-110 hover:brightness-110">
+						<img src="/icon_relogio.svg" alt="Ícone de qualidade" class="mx-auto">
+					</div>
+						<h3 class="text-white text-xl md:text-2xl mb-2 h-[4rem] flex flex-col items-center justify-start transition-colors duration-300 hover:text-amber-300">
+							<div>Orçamento</div>
+						<div class="font-bold">com agilidade</div>
+						</h3>
+				</div>
+						
+			</div>
+		</div>
+    </section>
+	<section class="w-full bg-neutral-100 py-12 md:py-24">
+		<div class="container mx-auto flex flex-col md:flex-row items-stretch gap-32 px-6">
+			
+			<!-- Coluna Esquerda -->
+			<div class="flex-1 flex flex-col justify-center ">
+				<h2 class="text-3xl font-bold text-gray-900 mb-6">
+					Sobre Nós
+				</h2>
+				<p class="text-gray-700 mb-4">
+					Na Z2, acreditamos que grandes projetos começam com as ferramentas certas. Somos uma empresa especializada em locação de equipamentos para construção civil, oferecendo soluções que unem qualidade, praticidade e confiança.
+				</p>
+				<p class="text-gray-700 mb-4">
+					Mais do que alugar, buscamos construir parcerias duradouras, baseadas em confiança, eficiência e respeito, nossa missão é conquistar a satisfação de nossos clientes.
+				</p>
+				<p class="text-gray-700">
+					Mais do que equipamentos, entregamos confiança e praticidade: cuidamos da logística de mobilização e desmobilização, oferecemos suporte técnico e garantimos que sua obra tenha sempre os recursos necessários para avançar sem interrupções.
+				</p>
+				<p class="text-gray-700">
+					Com experiência no setor e foco na satisfação do cliente, transformamos cada locação em uma parceria sólida, onde o compromisso é entregar eficiência e resultados.
+				</p>
+			</div>
+
+			<!-- Coluna Direita -->
+			<div class="">
+				<div class="relative bg-amber-500 w-120 h-120 overflow-visible rounded-xl">
+					<img
+						src="/section_sobre_nos.jpg"
+						alt="Imagem sobreposta"
+						class="absolute hover:left-[-30px] left-[0px] hover:bottom-[-30px] bottom-[0px] hover:rotate-[-3deg] rotate-[0deg] shadow-md object-cover rounded-lg aspect-square transition-all duration-200 ease-in-out"
+					/>
+				</div>
+			</div>
+			
+		</div>
+	</section>
+	<section class="relative w-full bg-linear-to-b from-amber-300 to-amber-500 py-20 overflow-hidden">
+  <div class="container mx-auto px-4">
+    <h2 class="text-3xl md:text-4xl lg:text-5xl font-bold text-center text-slate-950 mb-12 md:mb-16 uppercase tracking-wide">
+                Nossos Produtos
+            </h2>
+    <!-- Swiper Container -->
+    <div class="equipment-slider relative">
+      <div class="swiper-wrapper">
+        {equipmentData.map((item) => (
+          <div class="swiper-slide">
+            <div class="flex flex-col items-center justify-center gap-6 px-8">
+              <!-- Image Container with rounded corners -->
+              <div class="relative w-full max-w-md aspect-square">
+                <div class="absolute inset-0 bg-gradient-to-br from-black/5 to-black/20 rounded-[80px]" />
+                <img
+                  src={item.image}
+                  alt={item.alt}
+                  loading="lazy"
+                  class="relative w-full h-full object-contain rounded-[80px] drop-shadow-2xl"
+                />
+              </div>
+              
+              <!-- Text Content -->
+              <div class="text-center space-y-2">
+                <h3 class="text-2xl md:text-3xl font-bold text-gray-900">
+                  {item.name}
+                </h3>
+                <p class="text-lg md:text-xl text-gray-800">
+                  {item.quantity}
+                </p>
+              </div>
+            </div>
+          </div>
+        ))}
+      </div>
+
+      <!-- Navigation Buttons -->
+      <button
+        class="swiper-button-prev absolute left-4 md:left-8 top-1/2 -translate-y-1/2 z-10 w-12 h-12 flex items-center justify-center bg-white/80 hover:bg-white rounded-full shadow-lg transition-all duration-300 hover:scale-110"
+        aria-label="Previous slide"
+      >
+        <svg class="w-6 h-6 text-gray-800" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M15 19l-7-7 7-7" />
+        </svg>
+      </button>
+
+      <button
+        class="swiper-button-next absolute right-4 md:right-8 top-1/2 -translate-y-1/2 z-10 w-12 h-12 flex items-center justify-center bg-white/80 hover:bg-white rounded-full shadow-lg transition-all duration-300 hover:scale-110"
+        aria-label="Next slide"
+      >
+        <svg class="w-6 h-6 text-gray-800" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M9 5l7 7-7 7" />
+        </svg>
+      </button>
+
+      <!-- Pagination Dots -->
+      <div class="swiper-pagination !bottom-0 !relative mt-8"></div>
+    </div>
+  
+                          <div class=" flex justify-center items-center gap-16 py-12">
+                            <button class="inline-flex items-center gap-3 px-8 py-4 bg-gradient-to-r from-white to-neutral-200 hover:from-yellow-100 hover:to-yellow-200 text-gray-900 font-semibold rounded-full transition-all duration-300 shadow-lg hover:shadow-xl transform hover:scale-105 cursor-pointer">
+                                Faça seu pedido
+                                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M9 5l7 7-7 7"/>
+                                </svg>
+                            </button>
+                            <button class="inline-flex items-center gap-3 px-8 py-4 border-2 hover:ring border-white text-white focus:outline-none focus:ring-2 focus:ring-sky-900 focus:ring-opacity-75 font-semibold rounded-full transition-all transform hover:scale-105 cursor-pointer">
+                                PDF Materiais
+                                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M9 5l7 7-7 7"/>
+                                </svg>
+                            </button>
+                            
+                        </div>
+                        </div>
+</section>
+
+    <!-- Full-width background section -->
+    <section class="w-full bg-gray-200 py-16 md:py-24 bg-[url(/logo_bg.png)] bg-bottom bg-no-repeat">
+        <!-- Constrained container -->
+        <div class="container mx-auto px-4 md:px-6 lg:px-8 py-4">
+            <!-- Heading -->
+            <h2 class="text-3xl md:text-4xl lg:text-5xl font-bold text-center text-sky-900 mb-12 md:mb-16 uppercase tracking-wide">
+                Solicite um Orçamento
+            </h2>
+            
+            <!-- Form wrapper - centered and max-width constrained -->
+            <div class="max-w-md mx-auto">
+                <form class="space-y-4 md:space-y-5">
+                    <!-- Name input -->
+                    <div>
+                        <input 
+                            type="text" 
+                            placeholder="Seu nome" 
+                            class="w-full px-6 py-3 md:py-4 rounded-full border border-gray-400 bg-gray-200 text-gray-700 placeholder-gray-600 focus:outline-none focus:ring-2 focus:ring-sky-900 focus:border-transparent transition-all"
+                        >
+                    </div>
+                    
+                    <!-- Email input -->
+                    <div>
+                        <input 
+                            type="email" 
+                            placeholder="Seu e-mail" 
+                            class="w-full px-6 py-3 md:py-4 rounded-full border border-gray-400 bg-gray-200 text-gray-700 placeholder-gray-600 focus:outline-none focus:ring-2 focus:ring-sky-900 focus:border-transparent transition-all"
+                        >
+                    </div>
+                    
+                    <!-- Message textarea -->
+                    <div>
+                        <textarea 
+                            placeholder="Sua mensagem" 
+                            rows="6"
+                            class="w-full px-6 py-4 rounded-3xl border border-gray-400 bg-gray-200 text-gray-700 placeholder-gray-600 focus:outline-none focus:ring-2 
+                            focus:ring-sky-900 focus:border-transparent resize-none transition-all"
+                        ></textarea>
+                    </div>
+                    
+                    <!-- Submit button -->
+                    <div>
+                        <button 
+                            type="submit"
+                            class="w-full bg-sky-900 hover:bg-indigo-950 text-white font-medium py-3 md:py-4 px-6 rounded-full duration-300 ease-in-out shadow-md hover:shadow-lg transition-all transform hover:scale-105 cursor-pointer"
+                        >
+                            Enviar →
+                        </button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </section>
+<section class="w-full bg-white py-16 md:py-24">
+        <!-- Constrained container -->
+        <div class="container mx-auto px-4 md:px-6 lg:px-8">
+          <h2 class="text-3xl md:text-4xl lg:text-5xl font-bold text-center text-sky-900 mb-12 md:mb-16 uppercase tracking-wide">
+                Nossos Clientes
+          </h2>
+            <div class="flex justify-center items-center gap-16 py-12 ">
+            <img src="/images/logo_1.png" alt="" />
+            <img src="/images/logo_2.png" alt="" />
+            <img src="/images/logo_3.png" alt="" />
+            
+          
+        </div>
+</section>
+
+
+    <!-- Contact Section -->
+    <section class="w-full bg-sky-950 py-16 md:py-20">
+        <div class="container mx-auto px-4 md:px-6">
+            <div class="flex flex-col md:flex-row items-center justify-between gap-8 md:gap-16">
+                <!-- Left Column - Logo -->
+                <div class="flex-1 flex flex-col items-center md:items-start">
+                    <!-- Logo Icon -->
+                    <div class="mb-4">
+                        <img src="/images/logo_white_ltda.png" alt="">
+                    </div>
+                    <!-- Company Name -->
+                    
+                </div>
+
+                <!-- Vertical Divider - Hidden on mobile -->
+                <div class="hidden md:block w-0.5 h-32 lg:h-40 bg-white opacity-70"></div>
+
+                <!-- Right Column - Contact Info -->
+                <div class="flex-1 flex flex-col items-center md:items-start gap-4 text-center md:text-left">
+                    <!-- Instagram -->
+                    <div class="flex items-center gap-3">
+                        <svg class="w-6 h-6 text-white flex-shrink-0" fill="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/>
+                        </svg>
+                        <span class="text-white text-lg md:text-xl">@z2locacoes</span>
+                    </div>
+
+                    <!-- Email -->
+                    <div class="flex items-center gap-3">
+                        <svg class="w-6 h-6 text-white flex-shrink-0" fill="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M20 4H4c-1.1 0-1.99.9-1.99 2L2 18c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z"/>
+                        </svg>
+                        <span class="text-white text-lg md:text-xl break-all">z2locacoesltda@gmail.com</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+
+
+
+    <!-- Footer Section - Fixed at Bottom -->
+    <footer class="fixed bottom-0 left-0 w-full bg-neutral-900 py-4 md:py-3">
+        <div class="container mx-auto px-4">
+            <div class="flex flex-col items-center justify-center text-center gap-1">
+                <!-- First Line -->
+                <p class="text-white text-xs md:text-sm font-medium">
+                    Z2 Locações LTDA | Todos Direitos Reservados
+                </p>
+                
+                <!-- Second Line -->
+                <p class="text-white text-xs md:text-sm font-light">
+                    Desenvolvido por: SPACE 125 & André Tavares
+                </p>
+            </div>
+        </div>
+    </footer>
+
+   
+	
+	
+	<!-- Hero Section -->
+    
+	<script>
+		const mobileMenuBtn = document.getElementById('mobile-menu-btn');
+        const mobileMenu = document.getElementById('mobile-menu');
+        const menuIcon = document.getElementById('menu-icon');
+        const closeIcon = document.getElementById('close-icon');
+
+        if (mobileMenuBtn) {
+            mobileMenuBtn.addEventListener('click', () => {
+                if (mobileMenu) mobileMenu.classList.toggle('hidden');
+                if (menuIcon) menuIcon.classList.toggle('hidden');
+                if (closeIcon) closeIcon.classList.toggle('hidden');
+            });
+        }
+		// Initialize Swiper
+		import Swiper from 'swiper';
+  import { Navigation, Pagination, Autoplay } from 'swiper/modules';
+  const swiper = new Swiper('.equipment-slider', {
+    modules: [Navigation, Pagination, Autoplay],
+    slidesPerView: 1,
+    spaceBetween: 30,
+    loop: true,
+    grabCursor: true,
+    
+    // Navigation arrows
+    navigation: {
+      nextEl: '.swiper-button-next',
+      prevEl: '.swiper-button-prev',
+    },
+    
+    // Pagination dots
+    pagination: {
+      el: '.swiper-pagination',
+      clickable: true,
+    },
+
+    // Responsive breakpoints
+    breakpoints: {
+      640: {
+        slidesPerView: 1,
+      },
+      768: {
+        slidesPerView: 2,
+        spaceBetween: 40,
+      },
+      1024: {
+        slidesPerView: 3,
+        spaceBetween: 50,
+      },
+    },
+  });
+		</script>
+	</body>
+</html>
