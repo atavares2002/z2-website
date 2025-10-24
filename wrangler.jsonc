@@ -1,6 +1,6 @@
 {
   // Use the .jsonc extension to allow comments in your configuration file.
-  "name": "z2astro",
+  "name": "z2-site",
   "pages_build_output_dir": "./dist",
   "compatibility_date": "2024-04-05",
 }
