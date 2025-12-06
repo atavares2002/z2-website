@@ -3,6 +3,17 @@
 @import "swiper/css/navigation";
 @import "swiper/css/pagination";
 
+@font-face {
+  font-family: "Chamber Black";
+  src: url("/fonts/ChambersSansPro-Black.otf") format("opentype");
+  font-weight: normal;
+  font-style: normal;
+  font-display: swap;
+}
+
+@theme {
+  --font-custom: "Chamber Black", ui-sans-serif, system-ui, sans-serif;
+}
 .equipment-slider {
   max-width: 1200px;
   margin: 0 auto;
